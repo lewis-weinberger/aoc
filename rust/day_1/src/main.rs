@@ -13,17 +13,12 @@ fn main() -> Result<(), std::io::Error> {
     std::io::stdin().read_to_string(&mut buffer)?;
 
     // Process input
-    let input: Vec<Option<isize>> = buffer.lines()
-        .map(|arg| arg.parse::<isize>().ok())
+    let input: Vec<isize> = buffer.lines()
+        .filter_map(|arg| arg.parse::<isize>().ok())
         .collect();
 
     // Accumulate total fuel
-    let total = input.iter().fold(0, |sum, x| {
-        match x {
-            Some(mass) => sum + (*mass / 3) - 2,
-            None => sum,
-        }
-    });
+    let total = input.iter().fold(0, |sum, x| sum + (x / 3) - 2);
 
     // Print result
     println!("Total required fuel = {}", total);
