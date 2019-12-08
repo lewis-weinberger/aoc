@@ -1,0 +1,6 @@
+*~
+*.swp
+*.txt
+Cargo.lock
+target
+**/*.rs.bk
