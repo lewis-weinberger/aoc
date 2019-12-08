@@ -1,6 +1,13 @@
 # [Advent of Code 2019](https://adventofcode.com/2019) -- solutions
 > Solutions in Rust and Scheme.
 
+**Table of contents**
+1. [Installation](#installation)
+2. [Day 1](#day1)
+3. [Day 2](#day2)
+4. [License](#license)
+
+<a name="installation"></a>
 ## Installation
 
 To run the Scheme implementations you'll need a working installation of [GNU Guile](https://www.gnu.org/software/guile/download/). To run the Rust implementations you'll need to install [Rust](https://www.rust-lang.org/tools/install). For each of the programs below, it is assumed that the Rust code has been compiled with:
@@ -10,6 +17,9 @@ cargo build
 ```
 Note this needs to be run from the root of the Rust crate, e.g. for day 1 this should be run in `rust/day_1`. This would build the executable in the `rust/day_1/target/debug/` directory.
 
+---
+
+<a name="day1"></a>
 ## Day 1
 
 Assuming you have your puzzle input stored in a text-formatted file, `input.txt`, you can calculate the total required fuel using:
@@ -25,6 +35,9 @@ Total required fuel = X
 ```
 where X is the total fuel required for your puzzle input parameters. 
 
+---
+
+<a name="day2"></a>
 ## Day 2
 
 Assuming you have your puzzle input stored in a text-formatted file, `input.txt`, you can determine the final program value with:
@@ -39,4 +52,10 @@ The value left at position 0 after the program halts = X
 Noun = Y, verb = Z
 100 * noun + verb = W
 ```
-where, X and W are the desired results for day 2.
+where X and W are the desired results for day 2.
+
+
+<a name="license"></a>
+## License
+
+[MIT License](LICENSE)
