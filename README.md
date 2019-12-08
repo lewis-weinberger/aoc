@@ -23,4 +23,20 @@ Both programs will print:
 ```
 Total required fuel = X
 ```
-where X is the total fuel required for your puzzle input parameters.
+where X is the total fuel required for your puzzle input parameters. 
+
+## Day 2
+
+Assuming you have your puzzle input stored in a text-formatted file, `input.txt`, you can determine the final program value with:
+
+```bash
+cat input.txt | rust/day_2/target/debug/day_2      # rust
+```
+
+This will print:
+```
+The value left at position 0 after the program halts = X
+Noun = Y, verb = Z
+100 * noun + verb = W
+```
+where, X and W are the desired results for day 2.
