@@ -1,11 +1,16 @@
-# [Advent of Code 2019](https://adventofcode.com/2019) -- solutions
-> Solutions in Rust and Scheme.
+# [Advent of Code 2019](https://adventofcode.com/2019)
+> Solutions written in Rust and Scheme.
+
+[![rust](https://img.shields.io/badge/AoC%202019-Rust:%202%2F25-orange)](./rust)
+[![scheme](https://img.shields.io/badge/AoC%202019-Scheme:%201%2F25-red)](./scheme)
 
 **Table of contents**
 1. [Installation](#installation)
 2. [Day 1](#day1)
 3. [Day 2](#day2)
-4. [License](#license)
+4. [Day 3](#day3)
+5. [License](#license)
+
 
 <a name="installation"></a>
 ## Installation
@@ -17,7 +22,6 @@ cargo build
 ```
 Note this needs to be run from the root of the Rust crate, e.g. for day 1 this should be run in `rust/day_1`. This would build the executable in the `rust/day_1/target/debug/` directory.
 
----
 
 <a name="day1"></a>
 ## Day 1
@@ -31,11 +35,11 @@ cat input.txt | rust/day_1/target/debug/day_1      # rust
 
 Both programs will print:
 ```
-Total required fuel = X
+Part 1) Total required fuel = X
+Part 2) Total required fuel = Y
 ```
-where X is the total fuel required for your puzzle input parameters. 
+where X and Y are the total fuel required for your puzzle input parameters. 
 
----
 
 <a name="day2"></a>
 ## Day 2
@@ -48,12 +52,16 @@ cat input.txt | rust/day_2/target/debug/day_2      # rust
 
 This will print:
 ```
-The value left at position 0 after the program halts = X
-Noun = Y, verb = Z
-100 * noun + verb = W
+Part 1) The value left at position 0 after the program halts = W
+Part 2) Noun = X, verb = Y, 100 * noun + verb = Z
 ```
-where X and W are the desired results for day 2.
+where W, X, Y, and Z are the desired results for day 2.
 
+
+<a name="day3"></a>
+## Day 3
+
+Coming soon...
 
 <a name="license"></a>
 ## License
