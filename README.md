@@ -1,8 +1,10 @@
 # [Advent of Code 2019](https://adventofcode.com/2019)
 > Solutions written in Rust and Scheme.
 
+Broadly speaking I'm aiming to use a mostly *imperative* approach (loops, mutable state, etc.) in the Rust implementations, whilst trying instead to use a more *functional* approach (recursion, immutable state, etc.) for the Scheme implementations.
+
 [![rust](https://img.shields.io/badge/AoC%202019-Rust:%202%2F25-orange)](./rust)
-[![scheme](https://img.shields.io/badge/AoC%202019-Scheme:%201%2F25-red)](./scheme)
+[![scheme](https://img.shields.io/badge/AoC%202019-Scheme:%202%2F25-orange)](./scheme)
 
 **Table of contents**
 1. [Installation](#installation)
@@ -44,13 +46,14 @@ where X and Y are the total fuel required for your puzzle input parameters.
 <a name="day2"></a>
 ## Day 2
 
-Assuming you have your puzzle input stored in a text-formatted file, `input.txt`, you can determine the final program value with:
+Assuming you have your puzzle input stored in a text-formatted file, `input.txt`, you can determine the final program value with either:
 
 ```bash
+cat input.txt | guile -e main -s scheme/day_2.scm  # scheme
 cat input.txt | rust/day_2/target/debug/day_2      # rust
 ```
 
-This will print:
+These will both print:
 ```
 Part 1) The value left at position 0 after the program halts = W
 Part 2) Noun = X, verb = Y, 100 * noun + verb = Z
