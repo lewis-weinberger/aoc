@@ -10,40 +10,70 @@
 ;;; -------------------------------------------------
 ;;;
 
-(use-modules (ice-9 rdelim)  ;; read-line
-	     (srfi srfi-1)   ;; first, last, drop
-	     (srfi srfi-11)) ;; let-values
+(use-modules (ice-9 rdelim) ;; read-line
+	     (srfi srfi-1)) ;; first, last, drop
+
+
+;;; Coordinate setup -----------------------------------------------------------
+
+
+;; Coordinate pair
+(define (coord x y)
+  (cons x y))
+
+;; Return x-coordinate
+(define (coord-x coordinate)
+  (car coordinate))
+
+;; Return y-coordinate
+(define (coord-y coordinate)
+  (cdr coordinate))
+
+;; Difference between two coordinates along x
+(define (coord-dx a b)
+  (- (coord-x a) (coord-x b)))
+
+;; Difference between two coordinates along y
+(define (coord-dy a b)
+  (- (coord-y a) (coord-y b)))
+
+;; Append coordinate to list
+(define (append-coord lst coordinate)
+  (append lst `(,coordinate)))
+
+;; Check if coordinates are equal
+(define (eq-coord? a b)
+  (and (eqv? (coord-x a) (coord-x b))
+       (eqv? (coord-y a) (coord-y b))))
+
+;; New node at a distance (DX, DY) from previous node
+(define (new-node previous dx dy)
+    (let ((x (+ (coord-x previous) dx))
+	(y (+ (coord-y previous) dy)))
+    (coord x y)))
+
+;; Convert puzzle input command into node (dx, dy)
+(define (input->nodes nodes input)
+  (if (null? input)
+      nodes
+      (let ((dist (string->number (substring (first input) 1))))
+	(case (string-ref (first input) 0)
+	  ((#\U) (input->nodes (append-coord nodes (new-node (last nodes) 0 dist))
+			       (drop input 1)))
+	  ((#\D) (input->nodes (append-coord nodes (new-node (last nodes) 0 (- dist)))
+			       (drop input 1)))
+	  ((#\L) (input->nodes (append-coord nodes (new-node (last nodes) (- dist) 0))
+			       (drop input 1)))
+	  ((#\R) (input->nodes (append-coord nodes (new-node (last nodes) dist 0))
+			       (drop input 1)))))))
 
 ;; Read input from stdin
 (define (read-nodes)
-  (nodes '((0 0)) (string-split (read-line) #\,)))
+  (input->nodes `(,(coord 0 0)) (string-split (read-line) #\,)))
 
-;; Extract distance from routing command
-(define (distance x)
-  (string->number (substring x 1)))
 
-;; Add new node at a distance (DX, DY) from previous node
-(define (append-node previous dx dy)
-  (if (null? previous)
-      `((,dx ,dy))
-      (let ((x (+ (first (last previous)) dx))
-	    (y (+ (last (last previous)) dy)))
-	(append previous `((,x ,y))))))
+;;; Intersections --------------------------------------------------------------
 
-;; Convert puzzle input into nodes of wire path
-(define (nodes previous remaining)
-  (if (null? remaining)
-      previous
-      (let ((dist (distance (first remaining))))
-	(case (string-ref (first remaining) 0)
-	  ((#\U) (nodes (append-node previous 0 dist)
-			(drop remaining 1)))
-	  ((#\D) (nodes (append-node previous 0 (- dist))
-			(drop remaining 1)))
-	  ((#\L) (nodes (append-node previous (- dist) 0)
-			(drop remaining 1)))
-	  ((#\R) (nodes (append-node previous dist 0)
-			(drop remaining 1)))))))
 
 ;; Interval macro
 (define-syntax between
@@ -51,96 +81,132 @@
     ((between min max exp)
      (and (<= exp max) (<= min exp)))))
 
-;; Bezier parameterisation
-(define (bezier p1 p2 p3 p4)
-  (let* ((dx12 (- (first p1) (first p2)))
-	 (dx13 (- (first p1) (first p3)))
-	 (dx34 (- (first p3) (first p4)))
-	 (dy12 (- (last p1) (last p2)))
-	 (dy13 (- (last p1) (last p3)))
-	 (dy34 (- (last p3) (last p4)))
-	 (denom (- (* dx12 dy34) (* dy12 dx34))))
-    (values dx12 dx13 dx34 dy12 dy13 dy34 denom)))
-
-;; Check for intersection between line segments
-(define (intersect? p1 p2 p3 p4)
-  (let-values (((dx12 dx13 dx34 dy12 dy13 dy34 denom)
-		(call-with-values (lambda () (values p1 p2 p3 p4))
-		                  (lambda (a b c d) (bezier a b c d)))))
-    (if (not (= 0.0 denom))
-	(if (between 0.0 1.0 (/ (- (* dx13 dy34) (* dy13 dx34)) denom))
-	    (if (between 0.0 1.0 (/ (- (* dy12 dx13) (* dx12 dy13)) denom))
-		#t
-		#f)
-	    #f)
-	;; TO-DO: coincident intersections (currently ignored!)
-	#f)))
-
+;; Truncate number
 (define (number->integer num)
   (inexact->exact (floor num)))
-
-;; Calculate intersection point between line segments
-(define (intersection p1 p2 p3 p4)
-  (let-values (((dx12 dx13 dx34 dy12 dy13 dy34 denom)
-		(call-with-values (lambda () (values p1 p2 p3 p4))
-		                  (lambda (a b c d) (bezier a b c d)))))
-    (let ((t (/ (- (* dx13 dy34) (* dy13 dx34)) denom)))
-      `((,(- (first p1) (number->integer (* t dx12)))
-	 ,(- (last p1) (number->integer (* t dy12))))))))
     
-;; Determine if line segments intersect
-(define (intersect-iter crossings p q pn qn)
+;; Iterate over line segments to determine intersections between P and Q
+(define (intersections crossings p q pn qn)
   (if (< qn (length q))
-      (let ((p1 (list-ref p (- pn 1)))
-	    (p2 (list-ref p pn))
-	    (p3 (list-ref q (- qn 1)))
-	    (p4 (list-ref q qn)))
-	(if (intersect? p1 p2 p3 p4)
-	    (intersect-iter (append crossings (intersection p1 p2 p3 p4)) p q pn (+ qn 1))
-	    (intersect-iter crossings p q pn (+ qn 1))))
+      ;; Points defining current line segments
+      (let* ((p1 (list-ref p (- pn 1)))
+	     (p2 (list-ref p pn))
+	     (p3 (list-ref q (- qn 1)))
+	     (p4 (list-ref q qn))
+	     ;; Bezier parametrization
+	     (dx12 (coord-dx p1 p2))
+	     (dx13 (coord-dx p1 p3))
+	     (dx34 (coord-dx p3 p4))
+	     (dy12 (coord-dy p1 p2))
+	     (dy13 (coord-dy p1 p3))
+	     (dy34 (coord-dy p3 p4))
+	     (denom (- (* dx12 dy34) (* dy12 dx34))))
+	(if (not (= 0.0 denom))
+	    ;; Perpendicular intersections
+	    (let ((t (/ (- (* dx13 dy34) (* dy13 dx34)) denom)))
+	      (if (between 0.0 1.0 t)
+		  (let ((u (/ (- (* dy12 dx13) (* dx12 dy13)) denom)))
+		    (if (between 0.0 1.0 u)
+			(intersections (append-coord crossings
+						     ;; Coordinate of intersection
+						     (coord (- (coord-x p1) (number->integer (* t dx12)))
+							    (- (coord-y p1) (number->integer (* t dy12)))))
+				       p q pn (+ qn 1))
+			(intersections crossings p q pn (+ qn 1))))
+		  (intersections crossings p q pn (+ qn 1))))
+	    ;; Parallel intersections (currently ignored!)
+	    (intersections crossings p q pn (+ qn 1))))
       (if (< pn (- (length p) 1))
-	  (intersect-iter crossings p q (+ pn 1) 1)
+	  (intersections crossings p q (+ pn 1) 1)
 	  crossings)))
 
-;; Determine intersections between paths P and Q
-(define (intersections p q)
-  (intersect-iter '() p q 1 1))
+
+;;; Part 1 ---------------------------------------------------------------------
+
+
+;; Find minimum value in list
+(define (list-min lst min)
+  (if (null? lst)
+      min
+      (let ((current (first lst)))
+	(list-min (drop lst 1)
+		  (if (< current min)
+		      current
+		      min)))))
 
 ;; Manhattan distance from (0,0) to point A
 (define (manhattan a)
-  (+ (abs (first a)) (abs (last a))))
-
-;; Determine crossing with minimum manhattan distance
-(define (min-distance crossings d)
-  (if (null? crossings)
-      d
-      (let ((current (manhattan (first crossings))))
-	(min-distance (drop crossings 1)
-		      (if (< current d)
-			  current
-			  d)))))
-
-;; Determine crossing with minimum steps along wire
-(define (min-steps crossings p q s)
-  ;; TO-DO: complete this
-  21196)
+  (+ (abs (coord-x a)) (abs (coord-y a))))
 
 ;; Part 1
 (define (part-one crossings)
   (if (null? crossings)
       "?"
-      (min-distance crossings (manhattan (first crossings)))))
+      (list-min (map manhattan crossings)
+		(manhattan (first crossings)))))
+
+
+;;; Part 2 ---------------------------------------------------------------------
+
+
+;; Sign
+(define (sign num)
+  (if (= num 0)
+      0
+      (/ num (abs num))))
+
+;; Check if list contains coordinate value
+(define (contains? lst val)
+  (if (null? (filter (lambda (x) (eq-coord? x val)) lst))
+      #f
+      #t))
+
+;; Count steps along path to crossing
+(define (count-steps steps nsteps current remaining crossings)
+  (if (null? remaining)
+      steps
+      (let* ((next-node (first remaining))
+	     (dx (coord-dx next-node current))
+	     (dy (coord-dy next-node current))
+	     (new-steps (if (contains? crossings current)
+			    (append steps `(,nsteps))
+			    steps))
+	     (new-nsteps (if (or (not (= dx 0)) (not (= dy 0)))
+			     (+ nsteps 1)
+			     nsteps))
+	     (next-point (new-node current (sign dx) (sign dy)))
+	     (still-remaining (if (or (not (= dx 0)) (not (= dy 0)))
+				  remaining
+				  (drop remaining 1))))
+	(count-steps new-steps
+		     new-nsteps
+		     next-point
+		     still-remaining
+		     crossings))))
+
+;; Determine number of steps to each crossing
+(define (crossings->steps crossings p q)
+  ;; Determine steps to each crossing
+  (let ((steps-p (count-steps '() 0 (first p) p crossings))
+	(steps-q (count-steps '() 0 (first q) q crossings)))
+    ;; Add together steps along each wire
+    (map + steps-p steps-q)))
 
 ;; Part 2
 (define (part-two crossings p q)
   (if (null? crossings)
       "?"
-      (min-steps crossings p q 0)))
+      (let ((steps (crossings->steps crossings p q)))
+	(list-min steps (first steps)))))
+
+
+;;; Main -----------------------------------------------------------------------
+
 
 ;; Print results
 (define (main args)
   (let* ((p (read-nodes))
 	 (q (read-nodes)))
-    (let ((crossings (intersections p q)))
+    (let ((crossings (intersections '() p q 1 1)))
       (format #t "Part 1) The closest intersection is ~a away from the central port\n" (part-one crossings))
       (format #t "Part 2) ~a combined steps to reach nearest intersection\n" (part-two crossings p q)))))
