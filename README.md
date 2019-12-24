@@ -1,10 +1,10 @@
 # [Advent of Code 2019](https://adventofcode.com/2019)
 > Solutions written in Rust and Scheme.
 
-Broadly speaking I'm aiming to use a mostly *imperative* approach (loops, mutable state, etc.) in the Rust implementations, whilst trying instead to use a more *functional* approach (recursion, immutable state, etc.) for the Scheme implementations.
+The Rust implementations follow a broadly *imperative* approach (loops, mutable state, etc.), whilst the Scheme solutions instead use a more *functional* approach (recursion, immutable state, etc.).
 
-[![rust](https://img.shields.io/badge/AoC%202019-Rust:%202%2F25-orange)](./rust)
-[![scheme](https://img.shields.io/badge/AoC%202019-Scheme:%202%2F25-orange)](./scheme)
+[![rust](https://img.shields.io/badge/AoC%202019-Rust:%203%2F25-orange)](./rust)
+[![scheme](https://img.shields.io/badge/AoC%202019-Scheme:%203%2F25-orange)](./scheme)
 
 **Table of contents**
 1. [Installation](#installation)
@@ -64,7 +64,19 @@ where W, X, Y, and Z are the desired results for day 2.
 <a name="day3"></a>
 ## Day 3
 
-Coming soon...
+Assuming you have your puzzle input stored in a text-formatted file, `input.txt`, you can determine the final program value with either:
+
+```bash
+cat input.txt | guile -e main -s scheme/day_3.scm  # scheme
+cat input.txt | rust/day_3/target/debug/day_3      # rust
+```
+
+These will both print:
+```
+Part 1) The closest intersection is X away from the central port
+Part 2) Y combined steps to reach nearest intersection
+```
+where X, and Y are the desired results for day 3.
 
 <a name="license"></a>
 ## License

@@ -29,7 +29,6 @@ fn main() -> Result<(), std::io::Error> {
 
     // Determine all intersections between paths
     let crossings = intersections(&paths);
-    println!("Number of intersections = {}", crossings.len());
    
     // Part 1
     if let Some(distance) = min_distance(&crossings) {
