@@ -6,3 +6,11 @@
 Edit the [Makefile](./Makefile) to your satisfaction, and then run `make -r` to build all available solutions. You can build a particular day by specifying a number `make -r n`.
 
 ## Day 1
+
+Santa's expenses are read from STDIN:
+
+```sh
+./1 < input.txt
+```
+
+This will print the combinations which add to 2020.

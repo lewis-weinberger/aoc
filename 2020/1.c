@@ -1,45 +1,22 @@
 #include <stdio.h>
 #include "aoc.h"
 
-int
-main(void)
+int main(void)
 {
     int in[1024], n, i, j, k;
 
     n = readint(&in[0], 1024);
 
-    for (i = 0; i < n; i++)
-    {
-        for (j = 0; j < n; j++)
-        {
-            if (i == j)
-                continue;
-
+    /* When in doubt, use brute force */
+    for (i = 0; i < n; i++) {
+        for (j = i + 1; j < n; j++) {
             if (in[i] + in[j] == 2020)
-            {
                 printf("%d * %d = %d\n", in[i], in[j], in[i] * in[j]);
-                i = j = n;
-            }
-        }
-    }
 
-    for (i = 0; i < n; i++)
-    {
-        for (j = 0; j < n; j++)
-        {
-            if (i == j)
-                continue;
-
-            for (k = 0; k < n; k++)
-            {
-                if (i == k || j == k)
-                    continue;
-
+            for (k = j + 1; k < n; k++) {
                 if (in[i] + in[j] + in[k] == 2020)
-                {
-                    printf("%d * %d * %d = %d\n", in[i], in[j], in[k], in[i] * in[j] * in[k]);
-                    i = j = n;
-                }
+                    printf("%d * %d * %d = %d\n", in[i], in[j], in[k],
+                           in[i] * in[j] * in[k]);
             }
         }
     }
