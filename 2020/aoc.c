@@ -7,7 +7,7 @@ int readint(int *p, int n)
 {
     int m;
 
-    for (m = 0; scanf("%d\n", p++) != EOF && m < n; m++);
+    for (m = 0; m < n && scanf("%d\n", p++) != EOF; m++);
     return m;
 }
 
