@@ -21,3 +21,16 @@ B) 857 * 483 * 680 = 281473080
 ```
 
 ## Day 2
+
+The list of passwords is read in from STDIN:
+
+```sh
+./2 < input.txt
+```
+
+This will print the number of valid passwords:
+
+```
+A) 519 valid passwords
+B) 708 valid passwords
+```
