@@ -13,4 +13,11 @@ Santa's expenses are read from STDIN:
 ./1 < input.txt
 ```
 
-This will print the combinations which add to 2020.
+This will print the combinations which add to 2020:
+
+```
+A) 1404 * 616 = 864864
+B) 857 * 483 * 680 = 281473080
+```
+
+## Day 2

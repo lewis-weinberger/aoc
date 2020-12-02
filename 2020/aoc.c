@@ -3,20 +3,79 @@
 #include <stddef.h>
 #include "aoc.h"
 
-int readint(int *p, int n)
-{
-    int m;
+enum {
+    NHASH = 1024
+};
 
-    for (m = 0; m < n && scanf("%d\n", p++) != EOF; m++);
-    return m;
+hkv *htable[NHASH];
+
+/* hash: compute hash for integer keys */
+static unsigned int hash(int k)
+{
+    return k * (k + 3) % NHASH;
 }
 
+/* hinit: initialise the hash table */
+void hinit(void)
+{
+    int i;
+
+    for (i = 0; i < NHASH; i++)
+        htable[i] = NULL;
+}
+
+/* hinsert: insert key-value pair in hash table (TPOP) */
+void hinsert(int k, int v)
+{
+    int h;
+    hkv *n;
+
+    h = hash(k);
+    n = emalloc(sizeof(hkv));
+    n->key = k;
+    n->val = v;
+    n->next = htable[h];
+    htable[h] = n;
+}
+
+/* hlookup: lookup key-value pair in hash table (TPOP) */
+int hlookup(int k)
+{
+    int h;
+    hkv *p;
+
+    h = hash(k);
+    for (p = htable[h]; p != NULL; p = p->next) {
+        if (k == p->key)
+            return p->val;
+    }
+    return -1;
+}
+
+/* hfree: free memory allocated for hash table */
+void hfree(void)
+{
+    int i;
+    hkv *p, *q;
+
+    for (i = 0; i < NHASH; i++) {
+        p = htable[i];
+        while (p != NULL) {
+            q = p->next;
+            free(p);
+            p = q;
+        }
+    }
+}
+
+/* panic: print error and exit */
 void panic(const char *s)
 {
     perror(s);
     exit(1);
 }
 
+/* emalloc: malloc which panics on failure */
 void *emalloc(size_t size)
 {
     void *p;
@@ -27,6 +86,7 @@ void *emalloc(size_t size)
     return p;
 }
 
+/* erealloc: realloc which panics on failure */
 void *erealloc(void *ptr, size_t size)
 {
     void *p;
