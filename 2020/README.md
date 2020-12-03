@@ -34,3 +34,18 @@ This will print the number of valid passwords:
 A) 519 valid passwords
 B) 708 valid passwords
 ```
+
+## Day 3
+
+As previously, input is read from STDIN:
+
+```sh
+./3 < input.txt
+```
+
+This will print the output:
+
+```
+A) 167 trees encountered
+B) 736527114
+```
