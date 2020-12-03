@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include "aoc.h"
 
 enum {
     NWIDTH = 31,

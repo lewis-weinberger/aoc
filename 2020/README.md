@@ -5,47 +5,17 @@
 
 Edit the [Makefile](./Makefile) to your satisfaction, and then run `make -r` to build all available solutions. You can build a particular day by specifying a number `make -r n`.
 
-## Day 1
+## Usage
 
-Santa's expenses are read from STDIN:
-
-```sh
-./1 < input.txt
-```
-
-This will print the combinations which add to 2020:
-
-```
-A) 1404 * 616 = 864864
-B) 857 * 483 * 680 = 281473080
-```
-
-## Day 2
-
-The list of passwords is read in from STDIN:
+Problem inputs are read from STDIN:
 
 ```sh
-./2 < input.txt
+./n < input.txt
 ```
 
-This will print the number of valid passwords:
+The solutions to both parts of the problem are then printed:
 
 ```
-A) 519 valid passwords
-B) 708 valid passwords
-```
-
-## Day 3
-
-As previously, input is read from STDIN:
-
-```sh
-./3 < input.txt
-```
-
-This will print the output:
-
-```
-A) 167 trees encountered
-B) 736527114
+A) ... solution here ...
+B) ... solution here ...
 ```
