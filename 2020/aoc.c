@@ -6,7 +6,7 @@
 
 enum {
     NHASH = 1024,
-    MULTIPLIER = 37 /* somewhat magic */
+    MULTIPLIER = 37             /* somewhat magic */
 };
 
 typedef struct hashentry {
@@ -31,38 +31,38 @@ static unsigned int strhash(char *str)
     unsigned char *p;
 
     k = 0;
-    for (p = (unsigned char *)str; *p != '\0'; p++)
+    for (p = (unsigned char *) str; *p != '\0'; p++)
         k = MULTIPLIER * k + *p;
     return k % NHASH;
 }
 
 /* hash: compute hash depending on key type */
-static unsigned int hash(entry *k)
+static unsigned int hash(entry * k)
 {
     switch (k->type) {
-        case HINT:
-            return inthash(k->f.i);
-        case HSTR:
-            return strhash(k->f.s);
-        default:
-            panic("hash type not set");
+    case HINT:
+        return inthash(k->f.i);
+    case HSTR:
+        return strhash(k->f.s);
+    default:
+        panic("hash type not set");
     }
     return 0;
 }
 
 /* keycmp: compare hash keys for equivalence */
-static int keycmp(entry *p, entry *q)
+static int keycmp(entry * p, entry * q)
 {
     if (p->type != q->type)
         return -1;
 
     switch (p->type) {
-        case HINT:
-            return (p->f.i == q->f.i);
-        case HSTR:
-            return (strncmp(p->f.s, q->f.s, SNBUF) == 0) ? 1 : 0;
-        default:
-            panic("hash type not set");
+    case HINT:
+        return (p->f.i == q->f.i);
+    case HSTR:
+        return (strncmp(p->f.s, q->f.s, SNBUF) == 0) ? 1 : 0;
+    default:
+        panic("hash type not set");
     }
     return 0;
 }
@@ -77,7 +77,7 @@ void hinit(void)
 }
 
 /* hinsert: insert key-value pair in hash table (TPOP) */
-void hinsert(entry *k, entry *v)
+void hinsert(entry * k, entry * v)
 {
     int h;
     hkv *n;
@@ -91,7 +91,7 @@ void hinsert(entry *k, entry *v)
 }
 
 /* hlookup: lookup key-value pair in hash table (TPOP) */
-entry *hlookup(entry *k)
+entry *hlookup(entry * k)
 {
     int h;
     hkv *p;

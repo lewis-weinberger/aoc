@@ -18,7 +18,7 @@ typedef struct {
 } entry;
 
 void hinit(void);
-void hinsert(entry *, entry*);
+void hinsert(entry *, entry *);
 entry *hlookup(entry *);
 void hfree(void (*)(void *));
 
