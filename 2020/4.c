@@ -6,16 +6,6 @@
 static const char *fields[8] =
     { "byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid", "cid" };
 
-static entry *einit(const char *s)
-{
-    entry *e;
-
-    e = emalloc(sizeof(entry));
-    e->type = HSTR;
-    strncpy(e->f.s, s, sizeof(e->f.s));
-    return e;
-}
-
 static int isvalid(entry *k, entry *v)
 {
     int d, i;
@@ -77,8 +67,8 @@ static void parse(char *str, int *pr, int *va)
         if (*str == ' ' || *str == '\n') {
             s[i] = '\0';
             if (sscanf(s, "%3c:%s", key, val) != EOF) {
-                k = einit(key);
-                v = einit(val);
+                k = newstr(key);
+                v = newstr(val);
                 hinsert(k, v);
             }
             i = 0;
@@ -92,7 +82,7 @@ static void parse(char *str, int *pr, int *va)
     /* field[7] is optional (cid) */
     *pr = *va = 1;
     for (i = 0; i < 7; i++) {
-        k = einit(fields[i]);
+        k = newstr(fields[i]);
         v = hlookup(k);
         *pr &= (v != NULL);
         *va &= v ? isvalid(k, v) : 0;

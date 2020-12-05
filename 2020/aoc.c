@@ -122,6 +122,28 @@ void hfree(void (*efree)(void *))
     }
 }
 
+/* newint: create integer entry for hash table */
+entry *newint(int k)
+{
+    entry *e;
+
+    e = emalloc(sizeof(entry));
+    e->type = HINT;
+    e->f.i = k;
+    return e;
+}
+
+/* newstr: create string entry for hash table */
+entry *newstr(const char *s)
+{
+    entry *e;
+
+    e = emalloc(sizeof(entry));
+    e->type = HSTR;
+    strncpy(e->f.s, s, sizeof(e->f.s));
+    return e;
+}
+
 /* panic: print error and exit */
 void panic(const char *s)
 {

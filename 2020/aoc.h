@@ -17,6 +17,9 @@ typedef struct {
     } f;
 } entry;
 
+entry *newint(int);
+entry *newstr(const char *);
+
 void hinit(void);
 void hinsert(entry *, entry *);
 entry *hlookup(entry *);

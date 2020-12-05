@@ -6,16 +6,6 @@ enum {
     NBUF = 1024
 };
 
-static entry *einit(int k)
-{
-    entry *e;
-
-    e = emalloc(sizeof(entry));
-    e->type = HINT;
-    e->f.i = k;
-    return e;
-}
-
 int main(void)
 {
     int in[NBUF], *p, n, i, j;
@@ -26,8 +16,8 @@ int main(void)
 
     /* Read expenses from STDIN into hash table (kudos sam-kirby) */
     for (n = 0, p = &in[0]; n < NBUF && scanf("%d\n", p++) != EOF; n++) {
-        k = einit(in[n]);
-        v = einit(in[n]);
+        k = newint(in[n]);
+        v = newint(in[n]);
         hinsert(k, v);
     }
 
