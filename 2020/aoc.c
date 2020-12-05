@@ -37,7 +37,7 @@ static unsigned int strhash(char *str)
 }
 
 /* hash: compute hash depending on key type */
-static unsigned int hash(entry * k)
+static unsigned int hash(entry *k)
 {
     switch (k->type) {
     case HINT:
@@ -51,7 +51,7 @@ static unsigned int hash(entry * k)
 }
 
 /* keycmp: compare hash keys for equivalence */
-static int keycmp(entry * p, entry * q)
+static int keycmp(entry *p, entry *q)
 {
     if (p->type != q->type)
         return -1;
@@ -77,7 +77,7 @@ void hinit(void)
 }
 
 /* hinsert: insert key-value pair in hash table (TPOP) */
-void hinsert(entry * k, entry * v)
+void hinsert(entry *k, entry *v)
 {
     int h;
     hkv *n;
@@ -91,7 +91,7 @@ void hinsert(entry * k, entry * v)
 }
 
 /* hlookup: lookup key-value pair in hash table (TPOP) */
-entry *hlookup(entry * k)
+entry *hlookup(entry *k)
 {
     int h;
     hkv *p;
