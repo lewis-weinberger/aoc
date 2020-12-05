@@ -1,15 +1,26 @@
 #include <stddef.h>
 
-typedef struct hashentry {
-    int key;
-    int val;
-    struct hashentry *next;
-} hkv;
+enum {
+    SNBUF = 32
+};
+
+typedef enum {
+    HSTR,
+    HINT
+} entry_type;
+
+typedef struct {
+    entry_type type;
+    union {
+        char s[SNBUF];
+        int i;
+    } f;
+} entry;
 
 void hinit(void);
-void hinsert(int, int);
-int hlookup(int);
-void hfree(void);
+void hinsert(entry *, entry*);
+entry *hlookup(entry *);
+void hfree(void (*)(void *));
 
 void panic(const char *);
 void *emalloc(size_t);
