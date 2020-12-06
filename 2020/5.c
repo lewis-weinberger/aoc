@@ -3,28 +3,15 @@
 #include <math.h>
 #include "aoc.h"
 
-/* to recur or not to recur */
-static void parse(char *str, int *r, int *c)
+static int parse(char *str)
 {
-    int i, lo, hi, d;
+    int i, d;
 
-    for (i = 0, lo = 0, hi = 127; i < 7; i++) {
-        d = ceil((hi - lo) / 2.0);
-        if (str[i] == 'F')
-            hi -= d;
-        else
-            lo += d;
+    for (i = 0, d = 0; i < 10; i++) {
+        if (str[i] == 'B' || str[i] == 'R')
+            d += (1 << (9 - i));
     }
-    *r = (str[6] == 'F') ? lo : hi;
-
-    for (i = 7, lo = 0, hi = 7; i < 10; i++) {
-        d = ceil((hi - lo) / 2.0);
-        if (str[i] == 'L')
-            hi -= d;
-        else
-            lo += d;
-    }
-    *c = (str[9] == 'L') ? lo : hi;
+    return d;
 }
 
 int main(void)
@@ -37,8 +24,7 @@ int main(void)
     maxid = myid = 0;
 
     while (fgets(line, 12, stdin) != NULL) {
-        parse(line, &r, &c);
-        id = r * 8 + c;
+        id = parse(line);
         k = newint(id);
         v = newint(id);
         hinsert(k, v);
