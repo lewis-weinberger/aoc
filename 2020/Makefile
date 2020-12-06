@@ -8,7 +8,7 @@ CC = c89
 CFLAGS = -pedantic -O2 -Wall -Wextra  -Wpointer-arith \
           -Wcast-qual -Wstrict-prototypes -Wmissing-prototypes
 
-EXEC = 1 2 3 4 5
+EXEC = 1 2 3 4 5 6
 
 all: $(EXEC)
 
