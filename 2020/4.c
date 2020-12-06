@@ -6,16 +6,14 @@
 static const char *fields[8] =
     { "byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid", "cid" };
 
-static int isvalid(entry *k, entry *v)
+static int isvalid(const char *key, const char *val)
 {
     int d, i;
     long ld;
     unsigned int u;
-    char s[SNBUF], *key, *val;
+    char s[SNBUF];
 
     s[0] = '\0';
-    key = k->f.s;
-    val = v->f.s;
     if (strncmp(key, "byr", 3) == 0) {
         if (sscanf(val, "%d%n", &d, &i) == EOF || i != 4 || d < 1920
             || d > 2002)
@@ -55,9 +53,8 @@ static int isvalid(entry *k, entry *v)
 
 static void parse(char *str, int *pr, int *va)
 {
-    char key[4], val[SNBUF], s[SNBUF + 4];
+    char key[4], val[SNBUF], s[SNBUF + 4], *v;
     int i;
-    entry *k, *v;
 
     hinit();
     key[3] = '\0';
@@ -67,9 +64,7 @@ static void parse(char *str, int *pr, int *va)
         if (*str == ' ' || *str == '\n') {
             s[i] = '\0';
             if (sscanf(s, "%3c:%s", key, val) != EOF) {
-                k = newstr(key);
-                v = newstr(val);
-                hinsert(k, v);
+                hstrinsert(key, val);
             }
             i = 0;
         } else {
@@ -82,11 +77,9 @@ static void parse(char *str, int *pr, int *va)
     /* field[7] is optional (cid) */
     *pr = *va = 1;
     for (i = 0; i < 7; i++) {
-        k = newstr(fields[i]);
-        v = hlookup(k);
+        v = hstrlookup(fields[i]);
         *pr &= (v != NULL);
-        *va &= v ? isvalid(k, v) : 0;
-        free(k);
+        *va &= v ? isvalid(fields[i], v) : 0;
     }
     hfree(free);
 }

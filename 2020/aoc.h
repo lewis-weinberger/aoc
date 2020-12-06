@@ -25,6 +25,11 @@ void hinsert(entry *, entry *);
 entry *hlookup(entry *);
 void hfree(void (*)(void *));
 
+void hintinsert(int, int);
+void hstrinsert(char *, char *);
+int *hintlookup(int);
+char *hstrlookup(const char *);
+
 void panic(const char *);
 void *emalloc(size_t);
 void *erealloc(void *, size_t);

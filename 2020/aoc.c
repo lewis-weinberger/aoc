@@ -144,6 +144,48 @@ entry *newstr(const char *s)
     return e;
 }
 
+/* hintinsert: insert integer pair into hash table */
+void hintinsert(int key, int val)
+{
+    entry *k, *v;
+
+    k = newint(key);
+    v = newint(val);
+    hinsert(k, v);
+}
+
+/* hstrinsert: insert string pair into hash table */
+void hstrinsert(char *key, char *val)
+{
+    entry *k, *v;
+
+    k = newstr(key);
+    v = newstr(val);
+    hinsert(k, v);
+}
+
+/* hintlookup: lookup integer pair into hash table */
+int *hintlookup(int key)
+{
+    entry k, *v;
+
+    k.type = HINT;
+    k.f.i = key;
+    v = hlookup(&k);
+    return (v != NULL) ? &v->f.i : NULL;
+}
+
+/* hstrlookup: lookup string pair into hash table */
+char *hstrlookup(const char *key)
+{
+    entry *k, *v;
+
+    k = newstr(key);
+    v = hlookup(k);
+    free(k);
+    return (v != NULL) ? v->f.s : NULL;
+}
+
 /* panic: print error and exit */
 void panic(const char *s)
 {

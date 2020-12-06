@@ -18,16 +18,13 @@ int main(void)
 {
     int r, c, id, maxid, myid;
     char line[12];
-    entry *k, *v, *p;
 
     hinit();
     maxid = myid = 0;
 
     while (fgets(line, 12, stdin) != NULL) {
         id = parse(line);
-        k = newint(id);
-        v = newint(id);
-        hinsert(k, v);
+        hintinsert(id, id);
 
         /* Part A */
         if (id > maxid)
@@ -38,15 +35,10 @@ int main(void)
     for (r = 0; r < 127; r++) {
         for (c = 0; c < 7; c++) {
             id = r * 8 + c;
-            k = newint(id - 1);
-            v = newint(id);
-            p = newint(id + 1);
-            if (hlookup(k) != NULL && hlookup(p) != NULL
-                && hlookup(v) == NULL)
+            if (hintlookup(id - 1) != NULL
+                && hintlookup(id + 1) != NULL
+                && hintlookup(id) == NULL)
                 myid = id;
-            free(k);
-            free(v);
-            free(p);
         }
     }
     hfree(free);

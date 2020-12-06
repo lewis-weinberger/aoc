@@ -8,24 +8,20 @@ enum {
 
 int main(void)
 {
-    int in[NBUF], *p, n, i, j;
-    entry *k, *v, x;
+    int in[NBUF], *p, n, i, j, x;
 
     hinit();
-    x.type = HINT;
 
     /* Read expenses from STDIN into hash table (kudos sam-kirby) */
     for (n = 0, p = &in[0]; n < NBUF && scanf("%d\n", p++) != EOF; n++) {
-        k = newint(in[n]);
-        v = newint(in[n]);
-        hinsert(k, v);
+        hintinsert(in[n], in[n]);
     }
 
     /* Part A */
     for (i = 0; i < n; i++) {
-        x.f.i = 2020 - in[i];
-        if (hlookup(&x) != NULL) {
-            printf("A) %d * %d = %d\n", in[i], x.f.i, in[i] * x.f.i);
+        x = 2020 - in[i];
+        if (hintlookup(x) != NULL) {
+            printf("A) %d * %d = %d\n", in[i], x, in[i] * x);
             break;
         }
     }
@@ -33,10 +29,10 @@ int main(void)
     /* Part B */
     for (i = 0; i < n; i++) {
         for (j = i + 1; j < n; j++) {
-            x.f.i = 2020 - in[i] - in[j];
-            if (hlookup(&x) != NULL) {
-                printf("B) %d * %d * %d = %d\n", in[i], in[j], x.f.i,
-                       in[i] * in[j] * x.f.i);
+            x = 2020 - in[i] - in[j];
+            if (hintlookup(x) != NULL) {
+                printf("B) %d * %d * %d = %d\n", in[i], in[j], x,
+                       in[i] * in[j] * x);
                 i = j = n;
             }
         }
