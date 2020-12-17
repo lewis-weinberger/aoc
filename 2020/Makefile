@@ -3,10 +3,10 @@
 
 .POSIX:
 
-CC = c89
+CC = gcc
 
-CFLAGS = -pedantic -O2 -Wall -Wextra  -Wpointer-arith \
-          -Wcast-qual -Wstrict-prototypes -Wmissing-prototypes
+CFLAGS = -ansi -pedantic -O2 -Wall -Wextra  -Wpointer-arith \
+         -Wcast-qual -Wstrict-prototypes -Wmissing-prototypes
 
 EXEC = 1 2 3 4 5 6
 
