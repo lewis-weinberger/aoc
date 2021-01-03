@@ -4,7 +4,7 @@
 ## Installation
 
 #### C
-Requires a C compiler and `make`. In the `c/` subdirectory, edit the [Makefile](./Makefile) to your satisfaction, and then run `make -r` to build all available solutions. You can build a particular day by specifying a number `make -r n`.
+Requires a C compiler and `make`. In the `c/` subdirectory, edit the [Makefile](./c/Makefile) to your satisfaction, and then run `make -r` to build all available solutions. You can build a particular day by specifying a number `make -r n`.
 
 #### Nim
 Requires [Nim](https://nim-lang.org/install.html). You can use `nimble build` from within the `nim/` subdirectory to build the executables.
