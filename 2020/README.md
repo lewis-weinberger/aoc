@@ -1,9 +1,13 @@
 # [Advent of Code 2020](https://adventofcode.com/2020)
-> Solutions written in ANSI C (C89)
+> Solutions written in C and Nim
 
 ## Installation
 
-Edit the [Makefile](./Makefile) to your satisfaction, and then run `make -r` to build all available solutions. You can build a particular day by specifying a number `make -r n`.
+### C
+Requires a C compiler and `make`. In the 'c/' subdirectory, edit the [Makefile](./Makefile) to your satisfaction, and then run `make -r` to build all available solutions. You can build a particular day by specifying a number `make -r n`.
+
+### Nim
+Requires [Nim](https://nim-lang.org/install.html). You can use `nimble build` from within the `nim/` subdirectory to build the executables.
 
 ## Usage
 
