@@ -16,11 +16,11 @@ when isMainModule:
       # Part A
       let n = count(str, c)
       if (lo <= n) and (n <= hi):
-        inc na
+        inc(na)
 
       # Part B
       if (str[lo - 1] == c[0]) xor (str[hi - 1] == c[0]):
-        inc nb
+        inc(nb)
 
   echo(&"A) {na} valid passwords")
   echo(&"B) {nb} valid passwords")
