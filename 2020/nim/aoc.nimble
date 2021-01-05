@@ -5,7 +5,7 @@ author        = "lewis-weinberger"
 description   = "Nim solutions to Advent of Code 2020"
 license       = "MIT"
 srcDir        = "src"
-namedBin      = {"d1": "1", "d2": "2"}.toTable
+namedBin      = {"d1": "1", "d2": "2", "d3": "3"}.toTable
 
 
 # Dependencies
