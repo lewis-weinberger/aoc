@@ -1,4 +1,5 @@
-import strutils, tables, strformat
+from strutils import parseInt
+import tables, strformat
 
 when isMainModule:
   var line: string

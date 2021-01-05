@@ -1,4 +1,6 @@
-import strscans, strutils, strformat
+from strscans import scanf 
+from strutils import count
+import strformat
 
 when isMainModule:
   var 
