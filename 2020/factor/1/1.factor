@@ -1,7 +1,8 @@
 ! Copyright (C) 2021 Lewis Weinberger.
 ! See http://factorcode.org/license.txt for BSD license.
 
-USING: kernel sequences sets hash-sets math aoc formatting ;
+USING: kernel sequences sets hash-sets math formatting io
+math.parser ;
 IN: 1
 
 :: look-up? ( elt hash-set -- ? )
@@ -18,7 +19,8 @@ IN: 1
 
 : main ( -- )
   ! read puzzle input into hash set for fast look-up
-  input>sequence dup >hash-set [ part-one ] [ part-two ] 2bi
+  lines [ string>number ] map
+  dup >hash-set [ part-one ] [ part-two ] 2bi
   "A) %d\nB) %d\n" printf ;
 
 MAIN: main

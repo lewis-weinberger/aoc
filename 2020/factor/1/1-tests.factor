@@ -10,5 +10,4 @@ IN: 1.tests
 
 { 241861950 } [
   { 1721 979 366 299 675 1456 } dup >hash-set part-two 
-]
-unit-test
+] unit-test
