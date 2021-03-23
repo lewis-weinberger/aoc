@@ -3,8 +3,6 @@
 
 The Rust implementations follow a broadly *imperative* approach (loops, mutable state, etc.), whilst the Scheme solutions instead use a more *functional* approach (recursion, immutable state, etc.).
 
-[![rust](https://img.shields.io/badge/AoC%202019-Rust:%203%2F25-orange)](./rust)
-[![scheme](https://img.shields.io/badge/AoC%202019-Scheme:%203%2F25-orange)](./scheme)
 
 **Table of contents**
 1. [Installation](#installation)

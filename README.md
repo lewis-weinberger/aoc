@@ -1,1 +1,7 @@
-Attempts at some of the [Advent of Code](https://adventofcode.com/) problems for [2020](./2020) and [2019](./2019).
+<p align="center">
+    <a href="./2020"><img src="https://img.shields.io/badge/2020-6%2F25-orange"></a>
+    <a href="./2019"><img src="https://img.shields.io/badge/2019-3%2F25-orange"></a>
+</p>
+
+Attempts at some of the [Advent of Code](https://adventofcode.com/) problems.
+
