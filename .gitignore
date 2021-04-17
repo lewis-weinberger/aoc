@@ -4,3 +4,4 @@
 Cargo.lock
 target
 **/*.rs.bk
+zig-cache
