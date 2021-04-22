@@ -22,9 +22,10 @@ pub fn main() anyerror!void {
     const dy = [_]u32{ 1, 1, 1, 1, 2 };
 
     // Read and parse puzzle input from stdin
-    const stdin = std.io.getStdIn().reader();
+    var stdin = std.io.getStdIn().reader();
+    var in = std.io.bufferedReader(stdin).reader();
     var lbuf: [256]u8 = undefined;
-    while (try stdin.readUntilDelimiterOrEof(&lbuf, '\n')) |line| {
+    while (try in.readUntilDelimiterOrEof(&lbuf, '\n')) |line| {
         for (n) |_, i| {
             n[i] += tree(line, &x[i], &y[i], dx[i], dy[i]);
         }

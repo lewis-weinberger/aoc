@@ -16,9 +16,10 @@ pub fn main() anyerror!void {
     var c: []const u8 = undefined;
 
     // Read and parse puzzle input from stdin
-    const stdin = std.io.getStdIn().reader();
+    var stdin = std.io.getStdIn().reader();
+    var in = std.io.bufferedReader(stdin).reader();
     var buf: [256]u8 = undefined;
-    while (try stdin.readUntilDelimiterOrEof(&buf, '\n')) |line| {
+    while (try in.readUntilDelimiterOrEof(&buf, '\n')) |line| {
         const str = try parse(line, &lo, &hi, &c);
 
         // Part A

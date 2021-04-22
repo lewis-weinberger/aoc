@@ -13,7 +13,7 @@ pub fn main() anyerror!void {
     var map = std.AutoHashMap(i32, i32).init(allocator);
 
     // Read and parse puzzle input from stdin
-    const stdin = std.io.getStdIn().reader();
+    var stdin = std.io.bufferedReader(std.io.getStdIn().reader()).reader();
     var lbuf: [256]u8 = undefined;
     while (try stdin.readUntilDelimiterOrEof(&lbuf, '\n')) |line| {
         const n = try std.fmt.parseInt(i32, line, 10);
