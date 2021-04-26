@@ -95,8 +95,6 @@ pub fn main() anyerror!void {
 
     var stdin = std.io.getStdIn().reader();
     var in = std.io.bufferedReader(stdin).reader();
-    var eof = false;
-
     while (in.readByte() catch null) |c| {
         // Passport entries delimited by blank lines
         if (c == '\n') {
