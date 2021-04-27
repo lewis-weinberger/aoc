@@ -16,7 +16,7 @@ static int parse(char *str)
 
 int main(void)
 {
-    int r, c, id, maxid, myid;
+    int id, maxid, myid;
     char line[12];
 
     hinit();
@@ -32,14 +32,11 @@ int main(void)
     }
 
     /* Part B */
-    for (r = 0; r < 127; r++) {
-        for (c = 0; c < 7; c++) {
-            id = r * 8 + c;
-            if (hintlookup(id - 1) != NULL
-                && hintlookup(id + 1) != NULL
-                && hintlookup(id) == NULL)
-                myid = id;
-        }
+    for (id = 1; id < 1023; id++) {
+        if (hintlookup(id - 1) != NULL
+            && hintlookup(id + 1) != NULL
+            && hintlookup(id) == NULL)
+            myid = id;
     }
     hfree(free);
 
