@@ -16,7 +16,7 @@ pub fn main() anyerror!void {
     var arena = std.heap.ArenaAllocator.init(std.heap.page_allocator);
     defer arena.deinit();
     const allocator = &arena.allocator;
-    
+
     var map = std.AutoHashMap(u10, u10).init(allocator);
     var id: u10 = undefined;
     var na: u10 = 0;
@@ -40,7 +40,8 @@ pub fn main() anyerror!void {
     while (id < 1023) : (id += 1) {
         if (map.get(id - 1) != null and
             map.get(id + 1) != null and
-            map.get(id) == null) {
+            map.get(id) == null)
+        {
             nb = id;
         }
     }

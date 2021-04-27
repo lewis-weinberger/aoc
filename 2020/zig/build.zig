@@ -4,7 +4,7 @@ const bufPrint = std.fmt.bufPrint;
 const BufPrintError = std.fmt.BufPrintError;
 
 // Loop over the days to build each solution
-const days = [_][]const u8{ "1", "2", "3", "4", "5" };
+const days = [_][]const u8{ "1", "2", "3", "4", "5", "6" };
 
 pub fn build(b: *Builder) BufPrintError!void {
     const target = b.standardTargetOptions(.{});
