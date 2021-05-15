@@ -1,13 +1,17 @@
 const std = @import("std");
-
+const Allocator = std.mem.Allocator;
+const String = std.ArrayList(u8);
+const StringMap = std.StringHashMap(u8);
 const Bags = std.ArrayList([]const u8);
+const Backward = std.StringHashMap(Bags);
 const NBag = struct { n: usize, bag: []const u8 };
 const NBags = std.ArrayList(NBag);
+const Forward = std.StringHashMap(NBags);
 
-fn parse(allocator: *std.mem.Allocator, line: []const u8, backward: *std.StringHashMap(Bags), forward: *std.StringHashMap(NBags)) !void {
+fn parse(allocator: *Allocator, line: []const u8, backward: *Backward, forward: *Forward) !void {
     var iter = std.mem.tokenize(line, " ");
 
-    var parent = std.ArrayList(u8).init(allocator);
+    var parent = String.init(allocator);
     try parent.appendSlice(iter.next().?);
     try parent.appendSlice(iter.next().?);
     _ = iter.next(); // bags
@@ -20,7 +24,7 @@ fn parse(allocator: *std.mem.Allocator, line: []const u8, backward: *std.StringH
             _ = iter.next(); // bags
         } else {
             const n = try std.fmt.parseUnsigned(usize, num, 10);
-            var child = std.ArrayList(u8).init(allocator);
+            var child = String.init(allocator);
             try child.appendSlice(iter.next().?);
             try child.appendSlice(iter.next().?);
             _ = iter.next(); // bags
@@ -34,7 +38,7 @@ fn parse(allocator: *std.mem.Allocator, line: []const u8, backward: *std.StringH
     try forward.put(parent.items, children);
 }
 
-fn countBackward(backward: *std.StringHashMap(Bags), checked: *std.StringHashMap(u8), bag: []const u8) std.mem.Allocator.Error!usize {
+fn countBackward(backward: *Backward, checked: *StringMap, bag: []const u8) Allocator.Error!usize {
     var n: usize = 0;
     if (backward.get(bag)) |parents| {
         for (parents.items) |parent| {
@@ -48,7 +52,7 @@ fn countBackward(backward: *std.StringHashMap(Bags), checked: *std.StringHashMap
     return n;
 }
 
-fn countForward(forward: *std.StringHashMap(NBags), bag: []const u8) usize {
+fn countForward(forward: *Forward, bag: []const u8) usize {
     var n: usize = 0;
     if (forward.get(bag)) |children| {
         for (children.items) |child| {
@@ -76,7 +80,7 @@ pub fn main() anyerror!void {
         try parse(allocator, line, &backward, &forward);
     }
 
-    var checked = std.StringHashMap(u8).init(allocator);
+    var checked = StringMap.init(allocator);
     const na = try countBackward(&backward, &checked, "shinygold");
     std.debug.print("A) {d} bags can contain a shiny gold bag\n", .{na});
 
