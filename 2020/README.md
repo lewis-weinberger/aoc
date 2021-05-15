@@ -5,7 +5,7 @@
     <a href="./c"><img src="https://img.shields.io/badge/C-6%2F25-orange"></a>
     <a href="./nim"><img src="https://img.shields.io/badge/Nim-3%2F25-red"></a>
     <a href="./factor"><img src="https://img.shields.io/badge/Factor-2%2F25-red"></a>
-    <a href="./zig"><img src="https://img.shields.io/badge/Zig-6%2F25-orange"></a>
+    <a href="./zig"><img src="https://img.shields.io/badge/Zig-7%2F25-orange"></a>
 </p>
 
 This is an incomplete set of solutions to 2020's Advent of Code. I started with C, and then used the problems as a starting point for playing with Nim, Factor and Zig. Thus most of these solutions are probably not very idiomatic.
@@ -29,7 +29,7 @@ factor -e='USING: tools.deploy ; "1" deploy'  # build day 1 solution as executab
 Note this creates the executables in your Factor installation.
 
 #### Zig
-Requires [Zig](https://ziglang.org/learn/getting-started). To compile the solutions, run `zig build` from within the `zig/` sub-directory. This will put create a `zig-cache/bin` directory containing the executables which can be run as described below (or alternatively, run `zig build n` execute the *n*th day's solution). **Note**: requires Zig [master](https://ziglang.org/download/) (the provided `build.zig` does not work prior to [1032a69](https://github.com/ziglang/zig/commit/1032a693211dd96abe349bfa76b43bb1f226cfda#diff-581e0ec2dae9e97448da6d140a75539dc6c79595dfc4c70df65b98c000f8e6f5)).
+Requires [Zig](https://ziglang.org/learn/getting-started). To compile the solutions, run `zig build` from within the `zig/` sub-directory. This will create a `zig-cache/bin` directory containing the executables which can be run as described below (or alternatively, run `zig build n` execute the *n*th day's solution). **Note**: requires Zig [0.8.0-dev](https://ziglang.org/download/) (the provided `build.zig` does not work prior to [1032a69](https://github.com/ziglang/zig/commit/1032a693211dd96abe349bfa76b43bb1f226cfda#diff-581e0ec2dae9e97448da6d140a75539dc6c79595dfc4c70df65b98c000f8e6f5)).
 
 ## Usage
 
