@@ -29,8 +29,8 @@ Note this needs to be run from the root of the Rust crate, e.g. for day 1 this s
 Assuming you have your puzzle input stored in a text-formatted file, `input.txt`, you can calculate the total required fuel using:
 
 ```bash
-cat input.txt | guile -e main -s scheme/day_1.scm  # scheme
-cat input.txt | rust/day_1/target/debug/day_1      # rust
+guile -e main -s scheme/day_1.scm < input.txt  # scheme
+rust/day_1/target/debug/day_1 < input.txt      # rust
 ```
 
 Both programs will print:
@@ -47,8 +47,8 @@ where X and Y are the total fuel required for your puzzle input parameters.
 Assuming you have your puzzle input stored in a text-formatted file, `input.txt`, you can determine the final program value with either:
 
 ```bash
-cat input.txt | guile -e main -s scheme/day_2.scm  # scheme
-cat input.txt | rust/day_2/target/debug/day_2      # rust
+guile -e main -s scheme/day_2.scm < input.txt # scheme
+rust/day_2/target/debug/day_2 < input.txt     # rust
 ```
 
 These will both print:
@@ -65,8 +65,8 @@ where W, X, Y, and Z are the desired results for day 2.
 Assuming you have your puzzle input stored in a text-formatted file, `input.txt`, you can determine the final program value with either:
 
 ```bash
-cat input.txt | guile -e main -s scheme/day_3.scm  # scheme
-cat input.txt | rust/day_3/target/debug/day_3      # rust
+guile -e main -s scheme/day_3.scm < input.txt # scheme
+rust/day_3/target/debug/day_3 < input.txt     # rust
 ```
 
 These will both print:
