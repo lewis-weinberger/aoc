@@ -5,7 +5,7 @@
     <a href="./c"><img src="https://img.shields.io/badge/C-6%2F25-orange"></a>
     <a href="./nim"><img src="https://img.shields.io/badge/Nim-3%2F25-red"></a>
     <a href="./factor"><img src="https://img.shields.io/badge/Factor-2%2F25-red"></a>
-    <a href="./zig"><img src="https://img.shields.io/badge/Zig-10%2F25-yellow"></a>
+    <a href="./zig"><img src="https://img.shields.io/badge/Zig-11%2F25-yellow"></a>
 </p>
 
 This is an incomplete set of solutions to 2020's Advent of Code. I started with C, and then used the problems as a starting point for playing with Nim, Factor and Zig. Thus most of these solutions are probably not very idiomatic.

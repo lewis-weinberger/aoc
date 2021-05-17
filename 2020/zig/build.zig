@@ -15,6 +15,7 @@ const days = [_][]const u8{
     "8",
     "9",
     "10",
+    "11"
 };
 
 pub fn build(b: *Builder) BufPrintError!void {
