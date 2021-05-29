@@ -3,7 +3,7 @@
     <a href="./2019"><img src="https://img.shields.io/badge/2019-3%2F25-red"></a>
 </p>
 
-Attempts at some of the [Advent of Code](https://adventofcode.com/) problems.
+Attempts at some of the [Advent of Code](https://adventofcode.com/) problems in a variety of languages. *Caution*: the solutions might not be idiomatic!
 
 ### Usage
 

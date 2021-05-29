@@ -27,6 +27,13 @@ case $3 in
         check_file "$BUILD_DIR/day_$2.scm"
         RUN_CMD="guile -e main -s $BUILD_DIR/day_$2.scm"
         ;;
+    go)
+        check_lang go
+        BUILD_DIR="$1/go/day_$2"
+        check_file "$BUILD_DIR/main.go"
+        BUILD_CMD="go build"
+        RUN_CMD="$BUILD_DIR/day_$2"
+        ;;
     c)
         check_lang make
         check_lang "$CC"
@@ -55,7 +62,7 @@ case $3 in
         ;;
     *)
         echo "Solutions not available in $3 (yet!)"
-        echo "Try: rust | scheme | c | zig | nim"
+        echo "Try: rust | scheme | go | c | zig | nim"
         usage
         ;;
 esac
