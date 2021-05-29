@@ -1,0 +1,74 @@
+#!/bin/sh
+# Helper script to run different Advent of Code solutions.                    
+
+[ -n "$CC" ] || CC=gcc
+
+not_found() { echo "$1 not found!"; exit 1; }
+
+check_lang() { command -v "$1" > /dev/null || not_found "$1"; }
+
+check_file() { [ -f "$1" ] || not_found "$1"; }
+
+usage() { echo "Usage: aoc [YEAR] [DAY] [LANGUAGE] [INPUT]"; exit 1; }
+
+[ "$#" -ne 4 ] && usage
+
+case $3 in
+    rust)
+        check_lang cargo
+        BUILD_DIR="$1/rust/day_$2"
+        check_file "$BUILD_DIR/src/main.rs"
+        BUILD_CMD="cargo build"
+        RUN_CMD="$BUILD_DIR/target/debug/day_$2"
+        ;;
+    scheme)
+        check_lang guile
+        BUILD_DIR="$1/scheme"
+        check_file "$BUILD_DIR/day_$2.scm"
+        RUN_CMD="guile -e main -s $BUILD_DIR/day_$2.scm"
+        ;;
+    c)
+        check_lang make
+        check_lang "$CC"
+        BUILD_DIR="$1/c"
+        check_file "$BUILD_DIR/$2.c"
+        BUILD_CMD="make -r $2"
+        RUN_CMD="$BUILD_DIR/$2"
+        ;;
+    zig)
+        check_lang zig
+        BUILD_DIR="$1/zig"
+        check_file "$BUILD_DIR/src/$2.zig"
+        BUILD_CMD="zig build"
+        RUN_CMD="$BUILD_DIR/zig-cache/bin/$2"
+        ;;
+    nim)
+        check_lang nimble
+        BUILD_DIR="$1/nim"
+        check_file "$BUILD_DIR/src/d$2.nim"
+        BUILD_CMD="nimble build"
+        RUN_CMD="$BUILD_DIR/$2"
+        ;;
+    factor)
+        echo "Factor solutions need to be run manually..."
+        exit 1
+        ;;
+    *)
+        echo "Solutions not available in $3 (yet!)"
+        echo "Try: rust | scheme | c | zig | nim"
+        usage
+        ;;
+esac
+
+RUN_DIR=$(pwd)
+check_file "$4"
+
+set -x
+
+cd "$BUILD_DIR" || exit 1
+
+eval "$BUILD_CMD"
+
+cd "$RUN_DIR" || exit 1
+
+eval "$RUN_CMD < $4"
