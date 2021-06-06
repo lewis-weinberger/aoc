@@ -64,7 +64,7 @@ fn parse(allocator: *std.mem.Allocator, str: []u8, na: *u32, nb: *u32) !void {
 
     var pairs = std.mem.tokenize(str, " ");
     while (pairs.next()) |substr| {
-        try map.set(substr[0..3], substr[4..]);
+        try map.put(substr[0..3], substr[4..]);
     }
 
     var valid = true;
