@@ -2,7 +2,7 @@
 > Solutions written in C, Nim, Factor and... Zig
 
 <p align="center">
-    <a href="./zig"><img src="https://img.shields.io/badge/Zig-14%2F25-yellow"></a>
+    <a href="./zig"><img src="https://img.shields.io/badge/Zig-15%2F25-green"></a>
     <a href="./c"><img src="https://img.shields.io/badge/C-6%2F25-orange"></a>
     <a href="./nim"><img src="https://img.shields.io/badge/Nim-3%2F25-red"></a>
     <a href="./factor"><img src="https://img.shields.io/badge/Factor-2%2F25-red"></a>
