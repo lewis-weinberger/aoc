@@ -1,4 +1,5 @@
 <p align="center">
+    <a href="./2021"><img src="https://img.shields.io/badge/2021-1%2F25-red"></a>
     <a href="./2020"><img src="https://img.shields.io/badge/2020-15%2F25-green"></a>
     <a href="./2019"><img src="https://img.shields.io/badge/2019-3%2F25-red"></a>
 </p>
@@ -7,7 +8,7 @@ Attempts at some of the [Advent of Code](https://adventofcode.com/) problems in 
 
 ### Usage
 
-See [2019](./2019/README.md) or [2020](./2020/README.md) for detailed installation instructions.
+See [2019](./2019/README.md), [2020](./2020/README.md), or [2021](./2021/README.md) for detailed installation instructions.
 
 Solutions can be run with the [aoc](./aoc) shell script, e.g.:
 

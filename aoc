@@ -56,13 +56,19 @@ case $3 in
         BUILD_CMD="nimble build"
         RUN_CMD="$BUILD_DIR/$2"
         ;;
+    io)
+        check_lang io
+        BUILD_DIR="$1/io"
+        check_file "$BUILD_DIR/src/$2.io"
+        RUN_CMD="$BUILD_DIR/$2"
+        ;;
     factor)
         echo "Factor solutions need to be run manually..."
         exit 1
         ;;
     *)
         echo "Solutions not available in $3 (yet!)"
-        echo "Try: rust | scheme | go | c | zig | nim"
+        echo "Try: rust | scheme | go | c | zig | nim | io"
         usage
         ;;
 esac
