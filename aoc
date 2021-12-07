@@ -59,8 +59,8 @@ case $3 in
     io)
         check_lang io
         BUILD_DIR="$1/io"
-        check_file "$BUILD_DIR/src/$2.io"
-        RUN_CMD="$BUILD_DIR/$2"
+        check_file "$BUILD_DIR/$2.io"
+        RUN_CMD="$BUILD_DIR/$2.io"
         ;;
     factor)
         echo "Factor solutions need to be run manually..."

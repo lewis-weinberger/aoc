@@ -2,7 +2,7 @@
 > Solutions written in io
 
 <p align="center">
-    <a href="./io"><img src="https://img.shields.io/badge/io-6%2F25-orange"></a>
+    <a href="./io"><img src="https://img.shields.io/badge/io-7%2F25-orange"></a>
 </p>
 
 
