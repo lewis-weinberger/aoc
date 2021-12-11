@@ -39,7 +39,7 @@ input foreach(v,
 
 a := 0
 overlap foreach(k, v, if(v >= 2, a = a + 1))
-a println
+"A) #{a}" interpolate println
 
 input foreach(v,
     if((v at(0) != v at(2)) and (v at(1) != v at(3)), v findLines(overlap))
@@ -47,4 +47,4 @@ input foreach(v,
 
 b := 0
 overlap foreach(k, v, if(v >= 2, b = b + 1))
-b println
+"B) #{b}" interpolate println

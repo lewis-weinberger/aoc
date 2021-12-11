@@ -14,7 +14,7 @@ input foreach(v,
         "up", d = d - val
     )
 )
-(h * d) println
+"A) #{h * d}" interpolate println
 
 h := 0
 d := 0
@@ -29,4 +29,4 @@ input foreach(v,
         "up", a = a - val
     )
 )
-(h * d) println
+"B) #{h * d}" interpolate println

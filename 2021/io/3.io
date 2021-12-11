@@ -21,8 +21,7 @@ for(i, 0, n - 1,
         e = e + 2 ** i
     )
 )
-(g * e) println
-start := counts clone
+"A) #{g * e}" interpolate println
 
 part2 := method(op1, op2,
     rem := input clone
@@ -54,4 +53,4 @@ for(i, 0, n - 1,
     if(ofin at(n - 1 - i) == b, o = o + 2 ** i)
     if(cfin at(n - 1 - i) == b, c = c + 2 ** i)
 )
-(o * c) println
+"B) #{o * c}" interpolate println

@@ -79,5 +79,5 @@ input foreach(line,
 a := 0
 list(1, 4, 7, 8) foreach(v, a := a + counts at(v asString))
 
-a println
-b println
+"A) #{a}" interpolate println
+"B) #{b}" interpolate println

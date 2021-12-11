@@ -56,7 +56,10 @@ chosen foreach(c,
             x marked foreach(j, v, 
                 if(v not, unmarked = unmarked + x grid at(j))
             )
-            if(first, (called * unmarked) println; first = false)
+            if(first,
+                "A) #{called * unmarked}" interpolate println
+                first = false
+            )
             boards remove(x)
             n = n - 1
         )
@@ -64,4 +67,4 @@ chosen foreach(c,
     )
     if(boards size == 0, break)
 )
-(called * unmarked) println
+"B) #{called * unmarked}" interpolate println

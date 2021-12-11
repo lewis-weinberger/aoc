@@ -19,5 +19,5 @@ for(i, 0, input size,
     )
 )
 
-a println
-b println
+"A) #{a}" interpolate println
+"B) #{b}" interpolate println

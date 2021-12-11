@@ -13,7 +13,7 @@ input := File standardInput readLine split(",") map(c, c asNumber)
 
 m := input median
 a := input reduce(xs, x, xs + (x - m) abs, 0)
-a println
+"A) #{a}" interpolate println
 
 fuel := method(k,
     input reduce(xs, x, 
@@ -26,4 +26,4 @@ fuel := method(k,
 n := input average
 b1 := fuel(n floor)
 b2 := fuel(n ceil)
-if(b1 > b2, b2, b1) println
+"B) #{if(b1 > b2, b2, b1)}" interpolate println

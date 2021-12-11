@@ -21,8 +21,8 @@ n := 1
 
 while(n <= 80, n = reproduce(n, counts, next))
 a := counts reduce(+)
-a println
+"A) #{a}" interpolate println
 
 while(n <= 256, n = reproduce(n, counts, next))
 b := counts reduce(+)
-b asString(16,0) strip println
+"B) #{b asString(16,0) strip}" interpolate println
