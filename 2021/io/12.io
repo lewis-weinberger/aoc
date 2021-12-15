@@ -24,7 +24,7 @@ count := method(current, visits, revisitSmall,
         )
         c = c + count(cave, visits clone, revisitSmall)
     )
-    return(c)
+    c
 )
 
 visits := Map clone

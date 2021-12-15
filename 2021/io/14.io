@@ -39,7 +39,7 @@ Map pairToSingle := method(
     )
     final := template exSlice(template size - 1, template size)
     ret atPut(final, ret at(final, 0) + 1)
-    return(ret)
+    ret
 )
 
 for(n, 0, 9, polymerise)

@@ -3,7 +3,7 @@
 Sequence parseLine := method(
     coords := List clone
     self splitNoEmpties(" -> ") foreach(c, c split(",") foreach(v, coords push(v asNumber)))
-    return(coords)
+    coords
 )
 
 Number sign := method(

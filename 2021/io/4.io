@@ -1,60 +1,58 @@
 #!/usr/local/bin/io
 
-List atGrid := method(row, col, ncol,
-    return(self at(col + row * ncol))
-)
-
-Board := Object clone
-
-Board init := method(
-    super(init)
-    self grid := List clone
-    self marked := List clone
-    25 repeat(self marked push(false))
-)
-
-Board hasWon := method(
-    for(i, 0, 4,
-        row := true
-        for(j, 0, 4, row = row and self marked atGrid(i, j, 5))
-        if(row, return(true))
-    )
-    
-    for(j, 0, 4,
-        col := true
-        for(i, 0, 4, col = col and self marked atGrid(i, j, 5))
-        if(col, return(true))
+Board := Object clone do(
+    init := method(
+        self grid := List2D with(5, 5, 0)
+        self marked := List2D with(5, 5, false)
     )
 
-    return(false)
+    hasWon := method(
+        for(i, 0, 4,
+            row := true
+            for(j, 0, 4, row = row and self marked at(i, j))
+            if(row, return(true))
+        )
+        
+        for(j, 0, 4,
+            col := true
+            for(i, 0, 4, col = col and self marked at(i, j))
+            if(col, return(true))
+        )
+
+        false
+    )
 )
 
 input := File standardInput readLines
 chosen := input at(0) split(",") map(v, v asNumber)
 boards := List clone
 b := nil
-for(i, 1, input size - 1,
-    if(input at(i) size == 0,
+i := 0
+input foreach(in, line,
+    if(in == 0, continue)
+    if(line size == 0,
+        i = 0
         b = Board clone
         boards push(b),
-        input at(i) splitNoEmpties map(v, v asNumber) foreach(v, b grid push(v))
+        line splitNoEmpties map(v, v asNumber) foreach(j, v,
+            b grid atPut(i, j, v)
+        )
+        i = i + 1
     )
 )
 
 first := true
-called := nil
-unmarked := 0
 chosen foreach(c,
-    called = c
+    called := c
     n := 0
     while(n < boards size,
         x := boards at(n)
         i := x grid indexOf(c)
         if(i, x marked atPut(i, true))
         if(x hasWon,
-            unmarked = 0
-            x marked foreach(j, v, 
-                if(v not, unmarked = unmarked + x grid at(j))
+            unmarked := 0
+            x marked foreach(row, col, v,
+                if(v not, unmarked = unmarked + x grid at(row, col))
             )
             if(first,
                 "A) #{called * unmarked}" interpolate println

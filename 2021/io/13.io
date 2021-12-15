@@ -29,7 +29,7 @@ Map fold := method(spec,
         )
     )
 
-    return(self)
+    self
 )
 
 

@@ -11,7 +11,7 @@ reproduce := method(n, cnt, nxt,
         )
     )
     nxt foreach(i, v, cnt atPut(i, v))
-    return(n + 1)
+    n + 1
 )
 
 counts := list(0,0,0,0,0,0,0,0,0)

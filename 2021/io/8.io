@@ -5,7 +5,7 @@ Sequence containsAll := method(subSeq,
     for(i, 0, (subSeq size) - 1,
         if(self contains(subSeq at(i)) not, ret = false)
     )
-    return(ret)
+    ret
 )
 
 Sequence containsAllExact := method(subSeq,
