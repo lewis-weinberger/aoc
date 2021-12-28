@@ -9,7 +9,11 @@
 ## Installation
 
 #### io
-Requires [io](https://iolanguage.org/).
+Requires [io](https://iolanguage.org/). Day 15 requires the [PriorityQueue](https://github.com/lewis-weinberger/PriorityQueue.git) addon which can be installed with the [eerie](https://github.com/IoLanguage/eerie) package manager:
+
+```sh
+eerie install https://github.com/lewis-weinberger/PriorityQueue.git
+```
 
 ## Usage
 

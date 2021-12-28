@@ -19,11 +19,11 @@ dijkstra := method(start, cavern,
 
     visited := List2D with(rows, cols, false)
     cost := List2D with(rows, cols, inf)
-    queue := PriorityQueue with(cost)
+    queue := PriorityQueue with(rows * cols)
     
     cost atPut(start, 0)
     visited atPut(start, true)
-    queue push(start)
+    queue push(start, cost at(start))
     while(queue size > 0,
         q := queue pop
         if(q at(0) == rows - 1 and q at(1) == cols - 1, break)
@@ -31,12 +31,10 @@ dijkstra := method(start, cavern,
         adjacent(q) foreach(c,
             if(cavern isIndexValid(c),
                 new := cost at(q) + cavern at(c)
-                if(new < cost at(c),
+                if(new < cost at(c) and visited at(c) not,
                     cost atPut(c, new)
-                    if(visited at(c) not,
-                        queue push(c)
-                        visited atPut(c, true)
-                    )
+                    queue push(c, new)
+                    visited atPut(c, true)
                 )
             )
         )
