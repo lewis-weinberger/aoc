@@ -1,7 +1,8 @@
 # [Advent of Code 2019](https://adventofcode.com/2019)
-> Solutions written in Rust and Scheme.
+> Solutions written in Lua, Rust, Scheme and Go.
 
 <p align="center">
+    <a href="./rust"><img src="https://img.shields.io/badge/Lua-1%2F25-red"></a>
     <a href="./rust"><img src="https://img.shields.io/badge/Rust-3%2F25-red"></a>
     <a href="./scheme"><img src="https://img.shields.io/badge/Scheme-3%2F25-red"></a>
     <a href="./go"><img src="https://img.shields.io/badge/Go-2%2F25-red"></a>
@@ -9,7 +10,7 @@
 
 ## Installation
 
-To run the Go solutions you'll need to install [Golang](https://golang.org/). To run the Scheme implementations you'll need a working installation of [GNU Guile](https://www.gnu.org/software/guile/download/). To run the Rust implementations you'll need to install [Rust](https://www.rust-lang.org/tools/install). See the [aoc](../aoc) script.
+To run the Go solutions you'll need to install [Golang](https://golang.org/). To run the Scheme implementations you'll need a working installation of [GNU Guile](https://www.gnu.org/software/guile/download/). To run the Rust implementations you'll need to install [Rust](https://www.rust-lang.org/tools/install). To run the Lua implementations you'll need [Lua](https://www.lua.org/) (the `aoc` script uses [LuaJIT](https://luajit.org/luajit.html)). See the [aoc](../aoc) script.
 
 ## Usage
 

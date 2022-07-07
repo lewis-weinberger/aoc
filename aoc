@@ -1,5 +1,5 @@
 #!/bin/sh
-# Helper script to run different Advent of Code solutions.                    
+# Helper script to run different Advent of Code solutions.
 
 [ -n "$CC" ] || CC=gcc
 
@@ -66,9 +66,15 @@ case $3 in
         echo "Factor solutions need to be run manually..."
         exit 1
         ;;
+    lua)
+        check_lang luajit
+        BUILD_DIR="$1/lua"
+        check_file "$BUILD_DIR/$2.lua"
+        RUN_CMD="luajit $BUILD_DIR/$2.lua"
+        ;;
     *)
         echo "Solutions not available in $3 (yet!)"
-        echo "Try: rust | scheme | go | c | zig | nim | io"
+        echo "Try: rust | scheme | go | c | zig | nim | io | lua"
         usage
         ;;
 esac
