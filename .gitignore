@@ -6,3 +6,7 @@ target
 **/*.rs.bk
 zig-cache
 zig-out
+*.beam
+*.ez
+build
+erl_crash.dump

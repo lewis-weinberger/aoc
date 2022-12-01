@@ -13,6 +13,8 @@ usage() { echo "Usage: aoc [YEAR] [DAY] [LANGUAGE] [INPUT]"; exit 1; }
 
 [ "$#" -ne 4 ] && usage
 
+RUN_DIR=$(pwd)
+
 case $3 in
     rust)
         check_lang cargo
@@ -21,7 +23,7 @@ case $3 in
         BUILD_CMD="cargo build"
         RUN_CMD="$BUILD_DIR/target/debug/day_$2"
         ;;
-    scheme)
+    guile)
         check_lang guile
         BUILD_DIR="$1/scheme"
         check_file "$BUILD_DIR/day_$2.scm"
@@ -72,14 +74,19 @@ case $3 in
         check_file "$BUILD_DIR/$2.lua"
         RUN_CMD="luajit $BUILD_DIR/$2.lua"
         ;;
+    chez)
+        check_lang chezscheme
+        BUILD_DIR="$1/scheme"
+        check_file "$BUILD_DIR/$2.ss"
+        RUN_CMD="chezscheme --script $RUN_DIR/$BUILD_DIR/$2.ss"
+        ;;
     *)
         echo "Solutions not available in $3 (yet!)"
-        echo "Try: rust | scheme | go | c | zig | nim | io | lua"
+        echo "Try: rust | guile | go | c | zig | nim | io | lua | chez"
         usage
         ;;
 esac
 
-RUN_DIR=$(pwd)
 check_file "$4"
 
 set -x
@@ -88,6 +95,6 @@ cd "$BUILD_DIR" || exit 1
 
 eval "$BUILD_CMD"
 
-cd "$RUN_DIR" || exit 1
+[ -n "$RUN_DIR" ] && (cd "$RUN_DIR" || exit 1)
 
 eval "$RUN_CMD < $4"

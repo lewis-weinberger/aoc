@@ -2,10 +2,10 @@
 > Solutions written in Lua, Rust, Scheme and Go.
 
 <p align="center">
-    <a href="./rust"><img src="https://img.shields.io/badge/Lua-1%2F25-red"></a>
-    <a href="./rust"><img src="https://img.shields.io/badge/Rust-3%2F25-red"></a>
-    <a href="./scheme"><img src="https://img.shields.io/badge/Scheme-3%2F25-red"></a>
-    <a href="./go"><img src="https://img.shields.io/badge/Go-2%2F25-red"></a>
+    <a href="./lua"><img src="https://img.shields.io/badge/Lua-1%2F25-blue"></a>
+    <a href="./rust"><img src="https://img.shields.io/badge/Rust-3%2F25-blue"></a>
+    <a href="./scheme"><img src="https://img.shields.io/badge/Scheme-3%2F25-blue"></a>
+    <a href="./go"><img src="https://img.shields.io/badge/Go-2%2F25-blue"></a>
 </p>
 
 ## Installation
