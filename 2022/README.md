@@ -2,7 +2,7 @@
 > Solutions written in Scheme
 
 <p align="center">
-    <a href="./scheme"><img src="https://img.shields.io/badge/Scheme-4%2F25-blue"></a>
+    <a href="./scheme"><img src="https://img.shields.io/badge/Scheme-5%2F25-blue"></a>
 </p>
 
 
