@@ -1,10 +1,7 @@
-#include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-#define STRLEN 64
-#define UNUSED(X) (void)X
+#include "aoc.h"
 
 struct File
 {
@@ -26,13 +23,6 @@ struct Dir
 
 typedef struct File File;
 typedef struct Dir Dir;
-
-void
-die(const char *msg)
-{
-	perror(msg);
-	exit(1);
-}
 
 Dir*
 newdir(Dir *parent, const char *name)
