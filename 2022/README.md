@@ -3,7 +3,7 @@
 
 <p align="center">
     <a href="./scheme"><img src="https://img.shields.io/badge/Scheme-6%2F25-blue"></a>
-    <a href="./scheme"><img src="https://img.shields.io/badge/C-2%2F25-blue"></a>
+    <a href="./c"><img src="https://img.shields.io/badge/C-2%2F25-blue"></a>
 </p>
 
 
